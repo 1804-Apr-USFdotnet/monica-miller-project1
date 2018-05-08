@@ -11,12 +11,8 @@ namespace RestaurantReviews
         public int ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Zip { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string Hours { get; set; }
         public int AvgRating { get; set; }
         public List<BLReview> Reviews = new List<BLReview>();
 
@@ -25,7 +21,7 @@ namespace RestaurantReviews
             Reviews.Add(r);
         }
 
-        public static List<Restaurant> GetRestaurant()
+        public static List<BLRestaurant> GetRestaurant()
         {
             throw new NotImplementedException();
         }
@@ -34,8 +30,8 @@ namespace RestaurantReviews
         {
             StringBuilder restaurantString = new StringBuilder();
 
-            restaurantString.Append("Restaurant: " + this.Name + "\nAddress: " + this.Address + "\n\t" + this.City + " " + this.State + ", " + this.Zip);
-            restaurantString.Append("\nPhone: " + this.Phone + "\nHours: " + this.Hours);
+            restaurantString.Append("Restaurant: " + this.Name + "\nAddress: " + this.Address);
+            restaurantString.Append("\nPhone: " + this.Phone);
             return restaurantString.ToString();
             //return $"{Name}, {Ratings}"; //displays name and ratings
         }
@@ -52,7 +48,5 @@ namespace RestaurantReviews
 
             return avg;
         }
-
     }
 }
-        

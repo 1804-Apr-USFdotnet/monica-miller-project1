@@ -11,6 +11,6 @@ namespace RestaurantReviews
         public int id  { get; set; }
         public string name { get; set; }
         public int rating { get; set; }
-        public string review { get; set; }
+        public string text { get; set; }
     }
 }

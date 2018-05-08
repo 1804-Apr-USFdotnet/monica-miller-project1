@@ -18,11 +18,11 @@ namespace RestaurantReviews
             switch (_orderBy.ToLower())
             {
                 case "name":
-                    return restaurants.OrderBy(x => x.name).ToList();
+                    return restaurants.OrderBy(x => x.Name).ToList();
                 case "rating":
                     return restaurants.OrderBy(x => x.AvgRating).ToList();
                 default:
-                    return restaurants.OrderBy(x => x.name).ToList();
+                    return restaurants.OrderBy(x => x.Name).ToList();
 
               
             }

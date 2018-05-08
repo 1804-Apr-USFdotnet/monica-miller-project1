@@ -24,14 +24,14 @@ namespace UnitTestProject1
         
 
                 //compare properties of blRest and i
-                Assert.AreEqual(i.id, blRest.ID, "ID: \"" + i.id + "\" \"" + blRest.ID + '"');
-                Assert.AreEqual(blRest.Address, i.address, "Address: \"" + i.address + "\" \"" + blRest.Address + '"');
+                Assert.AreEqual(i.ID, blRest.ID, "ID: \"" + i.ID + "\" \"" + blRest.ID + '"');
+                Assert.AreEqual(blRest.Address, i.Address, "Address: \"" + i.Address + "\" \"" + blRest.Address + '"');
                 Assert.AreEqual(i.phone, blRest.Phone, "Phone: \"" + i.phone + "\" \"" + blRest.Phone + '"');
                 Assert.AreEqual(i.email, blRest.Email, "Email: \"" + i.email + "\" \"" + blRest.Email + '"');
                 Assert.AreNotEqual(i.AvgRating, blRest.AvgRating, "AvgRating: \"0" + i.AvgRating + "\" \"0" + blRest.AvgRating + '"');
-                Assert.AreNotEqual(i.city, blRest.City, "City: \"" + i.city + "\" \"" + blRest.City + '"');
-                Assert.AreNotEqual(i.state, blRest.State, "State: \"" + i.state + "\" \"" + blRest.Address + '"');
-                Assert.AreEqual(i.zip, blRest.ZIP, "ZIP: \"" + i.zip + "\" \"" + blRest.ZIP + '"');
+                //Assert.AreNotEqual(i.city, blRest.City, "City: \"" + i.city + "\" \"" + blRest.City + '"');
+                //Assert.AreNotEqual(i.state, blRest.State, "State: \"" + i.state + "\" \"" + blRest.Address + '"');
+                //Assert.AreEqual(i.zip, blRest.ZIP, "ZIP: \"" + i.zip + "\" \"" + blRest.ZIP + '"');
             }
         }
     }

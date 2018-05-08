@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.5.3\lib\net45\NLog.dll</HintPath>
@@ -43,7 +43,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -59,71 +58,63 @@
   <ItemGroup>
     <Compile Include="BLRestaurant.cs" />
     <Compile Include="CRUD.cs" />
-    <Compile Include="DataAccessLayer.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataAccessLayer.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccessLayer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataAccessLayer.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccessLayer.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataAccessLayer.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries.cs" />
-    <Compile Include="Restaurant.cs">
-      <DependentUpon>DataAccessLayer.tt</DependentUpon>
-    </Compile>
     <Compile Include="Converter.cs" />
-    <Compile Include="Review.cs">
-      <DependentUpon>DataAccessLayer.tt</DependentUpon>
-    </Compile>
     <Compile Include="BLReview.cs" />
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>DataAccessLayer.tt</DependentUpon>
+    <Compile Include="Restaurant.cs">
+      <DependentUpon>RestaurantReviewsEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>DataAccessLayer.tt</DependentUpon>
+    <Compile Include="RestaurantReviewsEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RestaurantReviewsEntity.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>DataAccessLayer.tt</DependentUpon>
+    <Compile Include="RestaurantReviewsEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RestaurantReviewsEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="RestaurantReviewsEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RestaurantReviewsEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Review.cs">
+      <DependentUpon>RestaurantReviewsEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sorter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IRestaurant\" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="DataAccessLayer.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataAccessLayer.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="DataAccessLayer.edmx.diagram">
-      <DependentUpon>DataAccessLayer.edmx</DependentUpon>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DataAccessLayer.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataAccessLayer.Context.cs</LastGenOutput>
-      <DependentUpon>DataAccessLayer.edmx</DependentUpon>
-    </Content>
-    <Content Include="DataAccessLayer.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataAccessLayer.edmx</DependentUpon>
-      <LastGenOutput>DataAccessLayer.cs</LastGenOutput>
-    </Content>
+    <EntityDeploy Include="RestaurantReviewsEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RestaurantReviewsEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="RestaurantReviewsEntity.edmx.diagram">
+      <DependentUpon>RestaurantReviewsEntity.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RestaurantReviewsEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RestaurantReviewsEntity.edmx</DependentUpon>
+      <LastGenOutput>RestaurantReviewsEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="RestaurantReviewsEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RestaurantReviewsEntity.edmx</DependentUpon>
+      <LastGenOutput>RestaurantReviewsEntity.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

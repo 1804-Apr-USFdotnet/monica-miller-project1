@@ -11,14 +11,20 @@ namespace RestaurantReviews
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Review
     {
         public int id { get; set; }
         public string name { get; set; }
+        [Required]
         public int rating { get; set; }
-        public string review1 { get; set; }
-    
+        public string text { get; set; }
+        [Required]
+        // public Nullable<int> RestID { get; set; }
+        public int RestID { get; set; }
+
+
         public virtual Restaurant Restaurant { get; set; }
     }
 }

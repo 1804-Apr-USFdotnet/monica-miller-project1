@@ -12,8 +12,8 @@ namespace RestaurantReviews
     {
         //Read from database
         static RestaurantReviewsEntities db;
-  
-        public static void CreateRestuarant(Restaurant restaurant)
+
+        public static void CreateRestaurant(Restaurant restaurant)
         {
             using (db = new RestaurantReviewsEntities())
             {
@@ -28,7 +28,7 @@ namespace RestaurantReviews
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException e)
                 {
-                    msg.Append(restaurant.name)
+                    msg.Append(restaurant.Name)
                         .Append("--");
 
                     foreach (var eve in e.EntityValidationErrors)
@@ -47,7 +47,7 @@ namespace RestaurantReviews
                                 .Append("\n");
                         }
                     }
-                   
+
                 }
                 catch (Exception ex)
                 {
@@ -91,14 +91,15 @@ namespace RestaurantReviews
         {
             using (db = new RestaurantReviewsEntities())
             {
-                return db.Restaurants.Where(x => x.name.Contains(key)).Include("Reviews").ToList();
+                return db.Restaurants.Where(x => x.Name.Contains(key)).Include("Reviews").ToList();
+                //return db.Restaurants.Where(x=>x.Name.Contains(key));
             }
         }
         public static IEnumerable<Restaurant> ReadRestaurantsSortByName()
         {
             using (db = new RestaurantReviewsEntities())
             {
-                return db.Restaurants.OrderByDescending(x => x.name).Include("Reviews").ToList();
+                return db.Restaurants.OrderByDescending(x => x.Name).Include("Reviews").ToList();
             }
         }
         public static IEnumerable<Restaurant> ReadRestaurantsSortByRating(int count)
@@ -107,6 +108,99 @@ namespace RestaurantReviews
             {
                 return db.Restaurants.OrderByDescending(x => x.AvgRating).Take(3).Include("Reviews").ToList();
             }
+        }
+
+
+        public static void UpdateReview(Review review)
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                Logger log = LogManager.GetCurrentClassLogger();
+                StringBuilder msg = new StringBuilder();
+
+                Review rev = db.Reviews.Find(review.id);
+
+                rev.rating = review.rating;
+                rev.name = review.name;
+                rev.text = review.text;
+            }
+        }
+
+        public static void UpdateRestaurant(Restaurant newRestaurant)
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                Logger log = LogManager.GetCurrentClassLogger();
+                StringBuilder msg = new StringBuilder();
+
+                Restaurant oldRestaurant = db.Restaurants.Find(newRestaurant.ID);
+
+                oldRestaurant.ID = newRestaurant.ID;
+                oldRestaurant.Name = newRestaurant.Name;
+                oldRestaurant.Address = newRestaurant.Address;
+                oldRestaurant.email = newRestaurant.email;
+                oldRestaurant.phone = newRestaurant.phone;
+                oldRestaurant.AvgRating = newRestaurant.AvgRating;
+
+            }
+        }
+
+        public static void CreateReview(Review rev)
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                Logger log = LogManager.GetCurrentClassLogger();
+                StringBuilder msg = new StringBuilder();
+
+                db.Reviews.Add(rev);
+            }
+        }
+
+        public static void DeleteReviewByID(int id)
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                Logger log = LogManager.GetCurrentClassLogger();
+                StringBuilder msg = new StringBuilder();
+
+                Review rev = db.Reviews.Find(id);
+
+                db.Reviews.Remove(rev);
+            }
+        }
+
+        public static void DeleteRestaurantByID(int id)
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                Logger log = LogManager.GetCurrentClassLogger();
+                StringBuilder msg = new StringBuilder();
+
+                Restaurant rest = db.Restaurants.Find(id);
+
+                db.Restaurants.Remove(rest);
+
+                ICollection<Review> reviews = db.Reviews.Where(x => x.id == rest.ID).ToList();
+                foreach (Review rev in reviews)
+                {
+                    db.Reviews.Remove(rev);
+                }
+            }
+        }
+
+        public static IEnumerable<Review> GetReviews()
+        {
+            using (db = new RestaurantReviewsEntities())
+            {
+                return db.Reviews.ToList();
+            }
+        }
+        public static List<Review> GetAllReviewsForRestaurant(int id)
+        {
+            var reviewList = GetReviews();
+            IEnumerable<Review> reviews = new List<Review>();
+            return reviewList.Where(x => x.RestID == id).ToList();
+
         }
     }
 }

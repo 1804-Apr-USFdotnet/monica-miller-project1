@@ -13,22 +13,22 @@ namespace RestaurantReviews
         {
             BLRestaurant result = new BLRestaurant
             {
-                ID = dbRestaurant.id,
-                Name = dbRestaurant.name,
-                Address = dbRestaurant.address,
+                ID = dbRestaurant.ID,
+                Name = dbRestaurant.Name,
+                Address = dbRestaurant.Address,
                 Phone = dbRestaurant.phone,
                 Email = dbRestaurant.email,
                 Reviews = new List<BLReview>()
 
             };
 
-            foreach (Review rev in dbRestaurant.Review)
+            foreach (Review rev in dbRestaurant.Reviews)
             {
                 result.Reviews.Add(ConvertReviewFromDB(rev));
             }
 
             return result;
-               
+
         }
         private static BLReview ConvertReviewFromDB(Review dbReview)
         {
@@ -45,16 +45,76 @@ namespace RestaurantReviews
         {
             Review result = new Review
             {
-                review1 = review.review.Substring(0, Math.Min(100, review.review.Length)),
+                id = review.id,
                 rating = review.rating,
                 name = review.name,
+                text = review.text,
             };
 
             return result;
         }
+        public static void Addrestaurant(BLRestaurant restaurants)
+        {
+            var temp = ConvertFromBL(restaurants);
+            CRUD.CreateRestaurant(temp);
+        }
+        public static Restaurant ConvertFromBL(BLRestaurant restaurant)
+        {
+            Restaurant result = new Restaurant
+            {
+                ID = restaurant.ID,
+                Name = restaurant.Name,
+                Address = restaurant.Address,
+                phone = restaurant.Phone,
+                email = restaurant.Email,
+                Reviews = new List<Review>()
+            };
+            return result;
+        }
+        public static void UpdateRestaurant(BLRestaurant restaurant)
+        {
+            CRUD.UpdateRestaurant(ConvertFromBL(restaurant));
+        }
+        public static void DeleteRestaurantByID(int id)
+        {
+            CRUD.DeleteRestaurantByID(id);
+        }
+        public static void CreateRestaurant(BLRestaurant restaurant)
+        {
+            CRUD.CreateRestaurant(ConvertFromBL(restaurant));
+        }
+
+        public static void AddReview(BLReview reviews)
+        {
+            var temp = ConvertFromBL(reviews);
+            CRUD.CreateReview(temp);
+        }
+
+        public static Review ConvertFromBL(BLReview review)
+        {
+            Review result = new Review
+            {
+                id = review.id,
+                name = review.name,
+                rating = review.rating,
+                text = review.text,
+            };
+            return result;
+        }
+    }
+}
+
+
+
 
         
-    }
+
+
+     
+
+        
+        
+    
  
     
-}
+

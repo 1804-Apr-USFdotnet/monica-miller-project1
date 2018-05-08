@@ -11,33 +11,26 @@ namespace RestaurantReviews
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Restaurant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Restaurant()
         {
-            this.Review = new HashSet<Review>();
+            this.Reviews = new HashSet<Review>();
         }
     
-        public int id { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        [Required]
+        public string Address { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
         public double AvgRating { get; set; }
+        [Required]
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Review> Review { get; set; }
-
-        public static List<Restaurant> GetTop3(List<Restaurant> restaurants)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static List<Restaurant> SearchByName(List<Restaurant> restaurants)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }
